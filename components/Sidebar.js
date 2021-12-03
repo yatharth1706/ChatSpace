@@ -12,7 +12,7 @@ import Chat from "./Chat";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
-  const userChatRef = db.collection("chats").where("users", "array-contains", user.email);
+  const userChatRef = db.collection("chats").where("users", "array-contains", user?.email);
   const [chatsSnapshot] = useCollection(userChatRef);
 
   const createChat = () => {
@@ -73,7 +73,21 @@ function Sidebar() {
 
 export default Sidebar;
 
-const Container = styled.div``;
+const Container = styled.div`
+  flex: 0.45;
+  border-right: 1px solid whitesmoke;
+  height: 100vh;
+  min-width: 300px;
+  max-width: 350px;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  -mx--ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+`;
 
 const Header = styled.div`
   display: flex;
