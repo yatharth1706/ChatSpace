@@ -29,7 +29,9 @@ function Chat({ id, users }) {
       ) : (
         <UserAvatar>{recipientEmail[0]}</UserAvatar>
       )}
-      <p>{recipientEmail}</p>
+      <p style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        {recipientEmail}
+      </p>
     </Container>
   );
 }
@@ -42,9 +44,10 @@ const Container = styled.div`
   cursor: pointer;
   padding: 15px;
   word-break: break-word;
-
+  height: 60px;
+  margin-top: 10px;
   :hover {
-    background-color: #70707029;
+    background-color: #202224;
   }
 `;
 

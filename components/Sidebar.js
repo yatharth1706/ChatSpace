@@ -9,11 +9,13 @@ import { auth, db } from "../firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
+import { useRouter } from "next/router";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
   const userChatRef = db.collection("chats").where("users", "array-contains", user?.email);
   const [chatsSnapshot] = useCollection(userChatRef);
+  const router = useRouter();
 
   const createChat = () => {
     const input = prompt("Please enter an email address for the user you wish to chat with");
@@ -44,8 +46,18 @@ function Sidebar() {
   return (
     <Container>
       <Header>
-        <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
-        <span style={{ marginLeft: "20px" }}>Yatharth Verma</span>
+        <UserAvatar
+          src={user.photoURL}
+          onClick={() => {
+            auth.signOut();
+          }}
+        />
+        <div style={{ marginLeft: "20px", display: "flex", flexDirection: "column" }}>
+          <span style={{ fontSize: "20px" }}>{user?.displayName}</span>
+          <small style={{ marginTop: "5px", fontSize: "12px", fontWeight: "lighter" }}>
+            {user?.email}
+          </small>
+        </div>
         <IconsContainer>
           {/* <IconButton>
             <ChatIcon />
@@ -61,13 +73,14 @@ function Sidebar() {
         <SearchInput placeholder="Search in chats" />
       </Search> */}
 
-      <SidebarButton onClick={createChat}>
-        <IconButton>
-          <ChatIcon style={{ color: "white" }} />
-        </IconButton>
-        Start a new chat
-      </SidebarButton>
-      <hr style={{ height: "0.8px", border: "0.21px solid black" }} />
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <SidebarButton onClick={createChat}>
+          <IconButton>
+            <ChatIcon style={{ color: "#2983FF" }} />
+          </IconButton>
+          Start a new chat
+        </SidebarButton>
+      </div>
       {/* List of chats */}
       {chatsSnapshot?.docs.map((chat) => (
         <Chat key={chat.id} id={chat.id} users={chat.data().users} />
@@ -79,11 +92,11 @@ function Sidebar() {
 export default Sidebar;
 
 const Container = styled.div`
-  background-color: #2f3136;
+  background-color: #121416;
   color: white;
   flex: 0.45;
   height: 100vh;
-  min-width: 250px;
+  min-width: 280px;
   max-width: 300px;
   overflow-y: scroll;
 
@@ -96,7 +109,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #2f3136;
+  background-color: #121416;
   color: white;
   display: flex;
   position: sticky;
@@ -105,7 +118,6 @@ const Header = styled.div`
   align-items: center;
   padding: 15px;
   height: 80px;
-  border-bottom: 1px solid black;
   margin-bottom: 10px;
 `;
 
@@ -133,9 +145,11 @@ const SearchInput = styled.input`
 `;
 
 const SidebarButton = styled(Button)`
-  width: 100%;
-  margin-top: 10px;
   &&& {
-    color: white;
+    background-color: white;
+    color: black;
+    width: 95%;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 `;

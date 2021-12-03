@@ -24,8 +24,7 @@ const Container = styled.div``;
 
 const MessageElement = styled.p`
   width: fit-content;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 15px 20px;
   margin: 10px;
   min-width: 60px;
   padding-bottom: 26px;
@@ -35,17 +34,24 @@ const MessageElement = styled.p`
 
 const Sender = styled(MessageElement)`
   margin-left: auto;
-  background-color: #41414124;
+  background-color: #2883ff;
+  color: white;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 `;
 
 const Reciever = styled(MessageElement)`
-  background-color: #0b0a0a;
-  color: white;
+  background-color: #202224;
+  color: #acaeb2;
   text-align: left;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 `;
 
 const Timestamp = styled.span`
-  color: gray;
+  color: #dedede;
   padding: 10px;
   font-size: 9px;
   position: absolute;
