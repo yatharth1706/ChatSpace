@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Sidebar from "./../components/Sidebar";
 import styled from "styled-components";
+import { device } from "./../sizes";
 
 export default function Home() {
   return (
@@ -36,6 +37,14 @@ const HeroSectionContainer = styled.div`
   justify-content: center;
   width: 100%;
   margin-top: 60px;
+
+  @media ${device.mobileL} {
+    display: none;
+  }
+
+  @media ${device.tablet} {
+    display: flex;
+  }
 `;
 
 const HeroSectionImage = styled.img``;

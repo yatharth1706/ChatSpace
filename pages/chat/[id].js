@@ -6,6 +6,7 @@ import ChatScreen from "../../components/ChatScreen";
 import { auth, db } from "../../firebaseConfig";
 import getRecipientEmail from "../../utils/getRecipientEmail";
 import { useAuthState } from "react-firebase-hooks/auth";
+import SidebarForChats from "../../components/SidebarForChats";
 
 function Chat({ chat, messages }) {
   const [user] = useAuthState(auth);
@@ -15,7 +16,7 @@ function Chat({ chat, messages }) {
       <Head>
         <title>Chat with {getRecipientEmail(chat.users, user)}</title>
       </Head>
-      <Sidebar />
+      <SidebarForChats />
       <ChatContainer>
         <ChatScreen chat={chat} messages={messages} />
       </ChatContainer>

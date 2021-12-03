@@ -9,11 +9,14 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import BackIcon from "@material-ui/icons/ArrowBack";
 import { useEffect, useRef, useState } from "react";
 import firebase from "firebase";
 import TimeAgo from "timeago-react";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+import Link from "next/link";
+import { device } from "../sizes";
 
 function ChatScreen({ chat, messages }) {
   const endOfMessagesRef = useRef(null);
@@ -152,12 +155,13 @@ function ChatScreen({ chat, messages }) {
           )}
         </HeaderInfo>
         <HeaderIcons>
-          {/* <IconButton>
-            <AttachFileIcon />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon />
-          </IconButton> */}
+          <BackIconButton>
+            <IconButton>
+              <Link href="/">
+                <BackIcon style={{ color: "white" }} />
+              </Link>
+            </IconButton>
+          </BackIconButton>
         </HeaderIcons>
       </Header>
       <MessageContainer>
@@ -201,6 +205,16 @@ function ChatScreen({ chat, messages }) {
 }
 
 export default ChatScreen;
+
+const BackIconButton = styled.div`
+  @media ${device.mobileL} {
+    display: block;
+  }
+
+  @media ${device.tablet} {
+    display: none;
+  }
+`;
 
 const Container = styled.div`
   height: 100vh;

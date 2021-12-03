@@ -12,7 +12,7 @@ import Chat from "./Chat";
 import { useRouter } from "next/router";
 import { device } from "../sizes";
 
-function Sidebar() {
+function SidebarForChats() {
   const [user] = useAuthState(auth);
   const userChatRef = db.collection("chats").where("users", "array-contains", user?.email);
   const [chatsSnapshot] = useCollection(userChatRef);
@@ -90,7 +90,7 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SidebarForChats;
 
 const Container = styled.div`
   background-color: #121416;
@@ -109,13 +109,11 @@ const Container = styled.div`
   scrollbar-width: none;
 
   @media ${device.mobileL} {
-    min-width: 100%;
-    max-width: 100%;
+    display: none;
   }
 
   @media ${device.tablet} {
-    min-width: 280px;
-    max-width: 300px;
+    display: block;
   }
 `;
 
