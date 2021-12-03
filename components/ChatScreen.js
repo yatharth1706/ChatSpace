@@ -114,6 +114,20 @@ function ChatScreen({ chat, messages }) {
     setInput(existingText);
   };
 
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  });
+
+  const handleClickOutside = (e) => {
+    console.log(emojiRef);
+    if (emojiRef && emojiRef.current && !emojiRef.current.contains(e.target)) {
+      setShowEmojiPicker(false);
+    }
+  };
+
   return (
     <Container>
       <Header>
@@ -156,15 +170,16 @@ function ChatScreen({ chat, messages }) {
           />
         </div>
         {showEmojiPicker && (
-          <Picker
-            ref={emojiRef}
-            title="Pick your emoji…"
-            emoji="point_up"
-            set="apple"
-            theme="dark"
-            onClick={handleSelectEmoji}
-            style={{ position: "absolute", bottom: "60px", left: "10px" }}
-          />
+          <div ref={emojiRef}>
+            <Picker
+              title="Pick your emoji…"
+              emoji="point_up"
+              set="apple"
+              theme="dark"
+              onClick={handleSelectEmoji}
+              style={{ position: "absolute", bottom: "60px", left: "10px" }}
+            />
+          </div>
         )}
         <Input
           value={input}
