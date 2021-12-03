@@ -96,7 +96,7 @@ const Container = styled.div`
   background-color: #121416;
   color: white;
   flex: 0.45;
-  height: 100vh;
+  height: 100%;
   min-width: 280px;
   max-width: 300px;
   overflow-y: scroll;

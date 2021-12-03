@@ -217,7 +217,7 @@ const BackIconButton = styled.div`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
 `;
 
 const Header = styled.div`
