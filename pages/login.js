@@ -16,7 +16,8 @@ function Login() {
       </Head>
 
       <LoginContainer>
-        <Logo src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" />
+        <Logo src="/chatHeroSection.svg" height={200} />
+        <h2>ChatSpace</h2>
         <Button variant="outlined" onClick={handleSignIn}>
           Sign in with Google
         </Button>
@@ -46,5 +47,4 @@ const LoginContainer = styled.div`
 const Logo = styled.img`
   height: 200px;
   width: 200px;
-  margin-bottom: 50px;
 `;

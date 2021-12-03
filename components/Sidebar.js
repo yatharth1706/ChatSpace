@@ -45,7 +45,7 @@ function Sidebar() {
     <Container>
       <Header>
         <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
-
+        <span style={{ marginLeft: "20px" }}>Yatharth Verma</span>
         <IconsContainer>
           {/* <IconButton>
             <ChatIcon />
@@ -63,11 +63,11 @@ function Sidebar() {
 
       <SidebarButton onClick={createChat}>
         <IconButton>
-          <ChatIcon />
+          <ChatIcon style={{ color: "white" }} />
         </IconButton>
         Start a new chat
       </SidebarButton>
-
+      <hr style={{ height: "0.8px", border: "0.21px solid black" }} />
       {/* List of chats */}
       {chatsSnapshot?.docs.map((chat) => (
         <Chat key={chat.id} id={chat.id} users={chat.data().users} />
@@ -79,11 +79,12 @@ function Sidebar() {
 export default Sidebar;
 
 const Container = styled.div`
+  background-color: #2f3136;
+  color: white;
   flex: 0.45;
-  border-right: 1px solid whitesmoke;
   height: 100vh;
-  min-width: 300px;
-  max-width: 350px;
+  min-width: 250px;
+  max-width: 300px;
   overflow-y: scroll;
 
   ::-webkit-scrollbar {
@@ -95,16 +96,17 @@ const Container = styled.div`
 `;
 
 const Header = styled.div`
+  background-color: #2f3136;
+  color: white;
   display: flex;
   position: sticky;
   top: 0;
-  background-color: white;
   z-index: 1;
-  justify-content: space-between;
   align-items: center;
   padding: 15px;
   height: 80px;
-  border-bottom: 1px solid whitesmoke;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
 `;
 
 const UserAvatar = styled(Avatar)`
@@ -132,8 +134,8 @@ const SearchInput = styled.input`
 
 const SidebarButton = styled(Button)`
   width: 100%;
+  margin-top: 10px;
   &&& {
-    border-top: 1px solid whitesmoke;
-    border-bottom: 1px solid whitesmoke;
+    color: white;
   }
 `;

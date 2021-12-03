@@ -208,7 +208,8 @@ const Container = styled.div`
 
 const Header = styled.div`
   position: sticky;
-  background-color: white;
+  background-color: #181818;
+  color: white;
   z-index: 100;
   top: 0;
   display: flex;
@@ -221,6 +222,7 @@ const Header = styled.div`
 const HeaderInfo = styled.div`
   margin-left: 15px;
   flex: 1;
+  line-height: 12px;
 
   > h3 {
     margin-bottom: 3px;
@@ -241,7 +243,7 @@ const MessageContainer = styled.div`
 `;
 
 const EndOfMessage = styled.div`
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 `;
 
 const InputContainer = styled.form`

@@ -5,12 +5,8 @@ function Loading() {
   return (
     <center style={{ display: "grid", placeItems: "center", height: "100vh" }}>
       <div>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
-          alt=""
-          height={200}
-        />
-        <Spinner radius={40} color={"#3CBC28"} stroke={3} visible={true} />
+        <img src="/chatHeroSection.svg" alt="" height={200} />
+        <Spinner radius={40} color={"black"} stroke={3} visible={true} />
       </div>
     </center>
   );
