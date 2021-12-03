@@ -229,6 +229,7 @@ const Header = styled.div`
   display: flex;
   padding: 11px;
   height: 12%;
+  min-height: 12%;
   align-items: center;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0);
 `;
@@ -253,7 +254,8 @@ const HeaderIcons = styled.div``;
 const MessageContainer = styled.div`
   padding: 30px;
   background-color: #161819;
-  min-height: 88%; ;
+  min-height: 78%;
+  height: 78%;
 `;
 
 const EndOfMessage = styled.div`
@@ -270,6 +272,7 @@ const InputContainer = styled.form`
   color: white;
   z-index: 100;
   width: 100%;
+  height: 10%;
 `;
 
 const Input = styled.input`
