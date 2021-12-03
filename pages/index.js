@@ -38,7 +38,7 @@ const HeroSectionContainer = styled.div`
   width: 100%;
   margin-top: 60px;
 
-  @media ${device.mobileL} {
+  @media ${device.mobileXS} {
     display: none;
   }
 

@@ -207,7 +207,7 @@ function ChatScreen({ chat, messages }) {
 export default ChatScreen;
 
 const BackIconButton = styled.div`
-  @media ${device.mobileL} {
+  @media ${device.mobileXL} {
     display: block;
   }
 

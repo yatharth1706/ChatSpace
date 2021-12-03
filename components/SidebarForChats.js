@@ -108,7 +108,7 @@ const Container = styled.div`
   -mx--ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none;
 
-  @media ${device.mobileL} {
+  @media ${device.mobileXS} {
     display: none;
   }
 
