@@ -32,6 +32,10 @@ function ChatScreen({ chat, messages }) {
     db.collection("users").where("email", "==", getRecipientEmail(chat.users, user))
   );
 
+  useEffect(() => {
+    setInput("");
+  }, [router.asPath]);
+
   const showMessages = () => {
     if (messagesSnapshot) {
       return messagesSnapshot.docs.map((message) => (
