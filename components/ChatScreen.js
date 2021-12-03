@@ -9,13 +9,16 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import firebase from "firebase";
 import TimeAgo from "timeago-react";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 function ChatScreen({ chat, messages }) {
-  console.log(chat, messages);
   const endOfMessagesRef = useRef(null);
+  const emojiRef = useRef(null);
+
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
   const router = useRouter();
@@ -23,6 +26,7 @@ function ChatScreen({ chat, messages }) {
   const [messagesSnapshot] = useCollection(
     db.collection("chats").doc(router.query.id).collection("messages").orderBy("timestamp", "asc")
   );
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const [recipientSnapshot] = useCollection(
     db.collection("users").where("email", "==", getRecipientEmail(chat.users, user))
@@ -103,6 +107,13 @@ function ChatScreen({ chat, messages }) {
     });
   };
 
+  const handleSelectEmoji = (items) => {
+    console.log(items);
+    let existingText = input;
+    existingText += items?.native;
+    setInput(existingText);
+  };
+
   return (
     <Container>
       <Header>
@@ -123,12 +134,12 @@ function ChatScreen({ chat, messages }) {
           )}
         </HeaderInfo>
         <HeaderIcons>
-          <IconButton>
+          {/* <IconButton>
             <AttachFileIcon />
           </IconButton>
           <IconButton>
             <MoreVertIcon />
-          </IconButton>
+          </IconButton> */}
         </HeaderIcons>
       </Header>
       <MessageContainer>
@@ -137,8 +148,31 @@ function ChatScreen({ chat, messages }) {
         <EndOfMessage ref={endOfMessagesRef} />
       </MessageContainer>
       <InputContainer>
-        <InsertEmoticonIcon />
-        <Input value={input} onChange={(e) => setInput(e.target.value)} />
+        <div style={{ marginRight: "10px" }}>
+          <InsertEmoticonIcon
+            id="emojis-btn"
+            onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+            style={{ cursor: "pointer" }}
+          />
+        </div>
+        {showEmojiPicker && (
+          <Picker
+            ref={emojiRef}
+            title="Pick your emoji…"
+            emoji="point_up"
+            set="apple"
+            theme="dark"
+            onClick={handleSelectEmoji}
+            style={{ position: "absolute", bottom: "60px", left: "10px" }}
+          />
+        )}
+        <Input
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value);
+            setShowEmojiPicker(false);
+          }}
+        />
         <button hidden disabled={!input} type="submit" onClick={sendMessage}>
           Send Message
         </button>

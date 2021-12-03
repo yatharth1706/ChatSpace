@@ -47,21 +47,26 @@ function Sidebar() {
         <UserAvatar src={user.photoURL} onClick={() => auth.signOut()} />
 
         <IconsContainer>
-          <IconButton>
+          {/* <IconButton>
             <ChatIcon />
           </IconButton>
           <IconButton>
             <MoreVertIcon />
-          </IconButton>
+          </IconButton> */}
         </IconsContainer>
       </Header>
 
-      <Search>
+      {/* <Search>
         <SearchIcon />
         <SearchInput placeholder="Search in chats" />
-      </Search>
+      </Search> */}
 
-      <SidebarButton onClick={createChat}>Start a new chat</SidebarButton>
+      <SidebarButton onClick={createChat}>
+        <IconButton>
+          <ChatIcon />
+        </IconButton>
+        Start a new chat
+      </SidebarButton>
 
       {/* List of chats */}
       {chatsSnapshot?.docs.map((chat) => (
