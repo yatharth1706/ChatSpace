@@ -11,6 +11,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import Chat from "./Chat";
 import { useRouter } from "next/router";
 import { device } from "../sizes";
+import Spinner from "react-spinner-material";
 
 function Sidebar() {
   const [user] = useAuthState(auth);
@@ -25,10 +26,17 @@ function Sidebar() {
       return;
     }
 
-    if (EmailValidator.validate(input) && input !== user.email && !chatAlreadyExists(input)) {
+    let inputValue = input;
+    inputValue = inputValue.toLowerCase();
+
+    if (
+      EmailValidator.validate(inputValue) &&
+      inputValue !== user.email &&
+      !chatAlreadyExists(inputValue)
+    ) {
       // We need to add the chat into DB chats collections
       db.collection("chats").add({
-        users: [user.email, input],
+        users: [user.email, inputValue],
       });
     }
   };
@@ -74,15 +82,25 @@ function Sidebar() {
         <SearchInput placeholder="Search in chats" />
       </Search> */}
 
-      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <SidebarButton onClick={createChat}>
-          <IconButton>
-            <ChatIcon style={{ color: "#2983FF" }} />
-          </IconButton>
-          Start a new chat
-        </SidebarButton>
-      </div>
+      {chatsSnapshot && (
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <SidebarButton onClick={createChat} disabled={!chatsSnapshot}>
+            <IconButton>
+              <ChatIcon style={{ color: "#2983FF" }} />
+            </IconButton>
+            Start a new chat
+          </SidebarButton>
+        </div>
+      )}
       {/* List of chats */}
+
+      {!chatsSnapshot && (
+        <div
+          style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "18px" }}
+        >
+          <Spinner radius={40} color={"white"} stroke={3} visible={true} />
+        </div>
+      )}
       {chatsSnapshot?.docs.map((chat) => (
         <Chat key={chat.id} id={chat.id} users={chat.data().users} />
       ))}
