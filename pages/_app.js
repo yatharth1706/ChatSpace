@@ -5,6 +5,7 @@ import Login from "./login";
 import Loading from "../components/Loading";
 import { useEffect } from "react";
 import firebase from "firebase";
+import NextNProgress from "nextjs-progressbar";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
@@ -25,7 +26,12 @@ function MyApp({ Component, pageProps }) {
   if (loading) return <Loading />;
   if (!user) return <Login />;
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <NextNProgress />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
